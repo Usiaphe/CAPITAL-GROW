@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh;
+}
+
+/* ====================== TICKER ====================== */
+.ticker-container {
+  background: #000;
+  border-bottom: 1px solid #111;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;           /* ← important */
+  z-index: 10;                  /* ← ticker stays above background but below header */
+}
+
+.ticker {
+  display: inline-block;
+  animation: scroll 45s linear infinite;
+  padding: 12px 0;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 40px;
+  font-size: 14px;
+}
+
+.pair   { color: #666; font-weight: 500; }
+.price  { color: white; font-weight: 600; }
+.change.up   { color: #10b981; }
+.change.up::before   { content: "Up "; }
+.change.down { color: #ef4444; }
+.change.down::before { content: "Down "; }
+
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ====================== MAIN HEADER ====================== */
+.main-header {
+  background: #000;
+  padding: 20px 20px 0;
+  position: relative;      /* ← makes header sit above ticker */
+  z-index: 20;             /* ← higher than ticker */
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 30;
+}
+
+.logo-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.5);
+}
+
+.logo-text h1 {
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+.capital { color: #dc2626; }
+.grow    { color: #06b6d4; }
+.investment {
+  font-size: 26px;
+  font-weight: bold;
+  color: #06b6d4;
+  margin-top: -6px;
+}
+
+/* Desktop Nav & Button */
+.desktop-nav {
+  display: none;
+  gap: 30px;
+}
+.desktop-nav a { color: #aaa; text-decoration: none; font-weight: 500; text-transform: uppercase; font-size: 14px; transition: color .3s; }
+.desktop-nav a:hover { color: white; }
+
+.desktop-btn {
+  display: none;
+  padding: 12px 32px;
+  border: 2px solid #dc2626;
+  background: transparent;
+  color: #dc2626;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .4s;
+}
+.desktop-btn:hover {
+  background: #dc2626;
+  color: white;
+  box-shadow: 0 0 20px rgba(220,38,38,.5);
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.mobile-menu-btn span {
+  width: 30px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #000;
+  padding: 30px 20px;
+  border-top: 1px solid #222;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 999;
+}
+.mobile-menu a { color: #ccc; text-decoration: none; font-size: 18px; font-weight: 500; }
+.mobile-login-btn {
+  margin-top: 10px;
+  padding: 16px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ====================== RESPONSIVE ====================== */
+@media (min-width: 768px) {
+  .logo-icon { width: 70px; height: 70px; font-size: 42px; }
+  .logo-text h1 { font-size: 36px; }
+  .investment { font-size: 30px; }
+}
+
+@media (min-width: 1024px) {
+  .desktop-nav, .desktop-btn { display: flex; align-items: center; }
+  .mobile-menu-btn, .mobile-menu { display: none; }
+  .header-content { flex-wrap: nowrap; }
+}
