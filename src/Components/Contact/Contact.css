@@ -1,211 +1,207 @@
-.about-page {
-  background: #000;
-  color: #fff;
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main page wrapper - controls overall layout and background */
+.contact-page-wrapper {
   min-height: 100vh;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Contact Us */
-.contact-us {
-  padding: 100px 20px 80px;
-  text-align: left;
-}
-.contact-us h1 {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-}
-.contact-us .subtitle {
-  font-size: 1.3rem;
-  opacity: 0.8;
-  max-width: 700px;
-  margin-bottom: 60px;
-}
-.message-us {
-  margin-top: 60px;
-}
-.message-us h3 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-}
-.email {
-  color: #c00;
-  font-size: 1.4rem;
-  margin: 20px 0;
-}
-.phone {
+  background-color: #000;
+  color: white;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  font-size: 1.4rem;
-  margin: 20px 0;
+  padding: 60px 20px 80px;
+  box-sizing: border-box;
 }
-.social-icons {
+
+/* Intro section: "Contact Us" heading + description */
+.contact-intro {
+  text-align: center;
+  max-width: 800px;
+  margin-bottom: 50px;
+}
+
+.contact-intro h1 {
+  font-size: 42px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.contact-intro p {
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Form container */
+.contact-form-container {
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 70px;
+}
+
+/* "Message Us" title above the form */
+.form-title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+}
+
+/* The form itself */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Name and Email row */
+.name-email-row {
   display: flex;
   gap: 20px;
-  margin-top: 30px;
-}
-.social-icons span {
-  width: 40px;
-  height: 40px;
-  background: #333;
-  border-radius: 50%;
+  width: 100%;
 }
 
-/* Legal Cards */
-.legal-cards {
-  padding: 80px 20px;
-  background: #0a0a0a;
+.name-email-row > div {
+  flex: 1;
 }
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 40px;
+
+/* Stack name/email vertically on smaller screens */
+@media (max-width: 768px) {
+  .name-email-row {
+    flex-direction: column;
+    gap: 24px;
+  }
 }
-.legal-card {
-  background: #111;
-  padding: 40px;
+
+/* Input fields and textarea */
+input,
+textarea {
+  width: 100%;
+  padding: 18px 20px;
+  border: none;
   border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+  transition: box-shadow 0.3s ease;
 }
-.icon-circle {
-  width: 80px;
-  height: 80px;
-  background: #c00;
-  border-radius: 50%;
-  margin-bottom: 25px;
+
+input:focus,
+textarea:focus {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
-.legal-card h4 {
-  font-size: 1.6rem;
+
+textarea {
+  min-height: 220px;
+  resize: vertical;
+}
+
+/* Submit button */
+.submit-button {
+  align-self: flex-end;
+  background-color: #d32f2f;
+  color: white;
+  padding: 15px 50px;
+  border: none;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #b71c1c;
+  transform: translateY(-2px);
+}
+
+/* Result message (success/error) */
+.result-message {
+  color: white;
+  text-align: center;
+  margin-top: 16px;
+  font-size: 16px;
+}
+
+/* Risk warning at the bottom */
+.risk-warning {
+  max-width: 900px;
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 20px 20px 0;
+  border-top: 1px solid #333;
+}
+
+.risk-warning strong {
+  color: white;
+  font-size: 16px;
+  display: block;
   margin-bottom: 15px;
 }
 
-
-.legal-card p {
-  opacity: 0.8;
-  margin-bottom: 25px;
-  line-height: 1.7;
-}
-.legal-card ul {
-  list-style: none;
-}
-.legal-card li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-  color: #aaa;
-}
-
-/* Knowledge */
-.knowledge {
-  padding: 120px 20px;
-  text-align: center;
-}
-.knowledge h2 {
-  font-size: 4.5rem;
-  line-height: 1.1;
-  margin-bottom: 30px;
-}
-.highlight {
-  color: #c00;
-}
-.knowledge p {
-  font-size: 1.3rem;
-  max-width: 800px;
-  margin: 0 auto 50px;
-  opacity: 0.9;
-}
-.action-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.btn-learn {
-  background: transparent;
-  color: #fff;
-  border: 2px solid #fff;
-  padding: 14px 32px;
-  border-radius: 30px;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-.btn-understand {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 14px 32px;
-  border-radius: 30px;
-  font-size: 1.1rem;
-}
-.btn-trade {
-  background: #c00;
-  color: white;
-  border: none;
-  padding: 14px 32px;
-  border-radius: 30px;
-  font-size: 1.1rem;
-}
-
-/* Footer */
-.about-footer {
-  background: linear-gradient(to bottom, #000, #0b001c);
-  padding: 80px 20px 40px;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 50px;
-  margin-bottom: 60px;
-  color: 0.9rem;
-}
-.footer-col h5 {
-  margin-bottom: 20px;
-  color: #aaa;
-}
-.address {
-  line-height: 1.8;
-}
-.risk-warning {
-  background: rgba(255,255,255,0.05);
-  padding: 20px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  max-width: 1000px;
-  margin: 0 auto 40px;
-  line-height: 1.6;
-}
-.copyright {
-  text-align: center;
-  opacity: 0.6;
-  font-size: 0.9rem;
-}
-
-/* Responsive */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .contact-us h1,
-  .knowledge h2 {
-    font-size: 3rem;
+  .contact-page-wrapper {
+    padding: 40px 20px 60px;
   }
-  .action-buttons {
-    flex-direction: column;
-    align-items: center;
+
+  .contact-intro {
+    margin-bottom: 40px;
   }
-  .btn-learn,
-  .btn-understand,
-  .btn-trade {
-    width: 80%;
-    max-width: 300px;
+
+  .contact-intro h1 {
+    font-size: 34px;
+  }
+
+  .contact-intro p {
+    font-size: 16px;
+  }
+
+  .form-title {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  .contact-form-container {
+    margin-bottom: 60px;
+  }
+
+  input,
+  textarea {
+    padding: 16px 18px;
+    font-size: 15px;
+  }
+
+  textarea {
+    min-height: 180px;
+  }
+
+  .submit-button {
+    align-self: stretch; /* Full width on mobile */
+    padding: 16px;
+    font-size: 18px;
+  }
+
+  .risk-warning {
+    font-size: 13px;
   }
 }
 
 @media (max-width: 480px) {
-  .contact-us h1,
-  .knowledge h2 {
-    font-size: 2.4rem;
+  .contact-intro h1 {
+    font-size: 30px;
+  }
+
+  .form-title {
+    font-size: 28px;
   }
 }

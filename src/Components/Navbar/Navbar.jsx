@@ -1,20 +1,21 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 const forexData = [
-  { pair: 'USDJPY', price: '109.59', up: true },
-  { pair: 'USDCAD', price: '1.3172', up: true },
-  { pair: 'USDCHF', price: '0.9776', up: true },
-  { pair: 'AUDUSD', price: '0.67064', up: false },
-  { pair: 'GBPJPY', price: '141.91', up: true },
-  { pair: 'XAUUSD', price: '1478.81', up: true },
+  { pair: "USDJPY", price: "109.59", up: true },
+  { pair: "USDCAD", price: "1.3172", up: true },
+  { pair: "USDCHF", price: "0.9776", up: true },
+  { pair: "AUDUSD", price: "0.67064", up: false },
+  { pair: "GBPJPY", price: "141.91", up: true },
+  { pair: "XAUUSD", price: "1478.81", up: true },
 ];
 
-const navLinks = ['Home', 'About', 'Contact', 'FAQ', 'Privacy'];
+const navLinks = ["Home", "About", "Contact", "FAQ", "Privacy"];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate(); // ✅ CORRECT NAVIGATION
 
   return (
     <>
@@ -25,8 +26,8 @@ export default function Navbar() {
             <div key={i} className="ticker-item">
               <span className="pair">{item.pair}</span>
               <span className="price">{item.price}</span>
-              <span className={`change ${item.up ? 'up' : 'down'}`}>
-                {item.up ? 'Up' : 'Down'}
+              <span className={`change ${item.up ? "up" : "down"}`}>
+                {item.up ? "Up" : "Down"}
               </span>
             </div>
           ))}
@@ -36,7 +37,6 @@ export default function Navbar() {
       {/* Main Header */}
       <header className="main-header">
         <div className="header-content">
-
           {/* Logo */}
           <div className="logo">
             <div className="logo-icon">G</div>
@@ -51,10 +51,13 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <nav className="desktop-nav">
-            {navLinks.map(link => {
+            {navLinks.map((link) => {
               const path = link.toLowerCase();
               return (
-                <Link key={link} to={path === 'home' ? '/' : `/${path}`}>
+                <Link
+                  key={link}
+                  to={path === "home" ? "/" : `/${path}`}
+                >
                   {link}
                 </Link>
               );
@@ -62,8 +65,19 @@ export default function Navbar() {
           </nav>
 
           {/* Desktop Buttons */}
-          <button className="desktop-btn">Login Account</button>
-          <button className="desktop-btn">Open Account</button>
+          <button
+            className="desktop-btn"
+            onClick={() => navigate("/login")}
+          >
+            Login Account
+          </button>
+
+          <button
+            className="desktop-btn"
+            onClick={() => navigate("/register")}
+          >
+            Open Account
+          </button>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -79,20 +93,38 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="mobile-menu">
-            {navLinks.map(link => {
+            {navLinks.map((link) => {
               const path = link.toLowerCase();
               return (
                 <Link
                   key={link}
-                  to={path === 'home' ? '/' : `/${path}`}
+                  to={path === "home" ? "/" : `/${path}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link}
                 </Link>
               );
             })}
-            <button className="mobile-login-btn"> Register</button>
-            <button className="mobile-login-btn">Login</button>
+
+            <button
+              className="mobile-login-btn"
+              onClick={() => {
+                navigate("/register");
+                setMobileMenuOpen(false);
+              }}
+            >
+              Register
+            </button>
+
+            <button
+              className="mobile-login-btn"
+              onClick={() => {
+                navigate("/login");
+                setMobileMenuOpen(false);
+              }}
+            >
+              Login
+            </button>
           </div>
         )}
       </header>

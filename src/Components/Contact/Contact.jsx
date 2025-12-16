@@ -1,131 +1,74 @@
-import { Link } from "react-router-dom";
-import "./Contact.css";
+import { useState } from 'react';
+import "./Contact.css"
 
-function Contact() {
+export default function Contact() {
+  const [result, setResult] = useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    formData.append("access_key", "15b7afcf-0f9e-4524-80f8-52904f0a1283");
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+    setResult(data.success ? "Success!" : "Error");
+  };
+
   return (
-    <div className="about-page">
-      {/* Contact Us Section */}
-      <section className="contact-us">
-        <div className="container">
-          <h1>Contact Us</h1>
-          <p className="subtitle">
-            Do not hesitate to reach out. Just fill in the contact form here and we'll be sure to reply as fast as possible.
-          </p>
 
-          <div className="message-us">
-            <h3>Message us</h3>
-            <p className="email">support@capitalgrowinvest-ment.com</p>
-            <p className="phone">
-              <span>{/* icon-phone */}</span> +1 (272) 432-1134
-            </p>
-            <div className="social-icons">
-              <span>{/* icon-facebook */}</span>
-              <span>{/* icon-twitter */}</span>
-              <span>{/* icon-linkedin */}</span>
-              <span>{/* icon-instagram */}</span>
-              <span>{/* icon-pinterest */}</span>
-            </div>
-          </div>
+    <> 
+<div className="contact-page-wrapper">
+  {/* Intro Section */}
+  <div className="contact-intro">
+    <h1>Contact Us</h1>
+    <p>
+      Do not hesitate to reach out, just fill in the contact form <br />
+      here and we'll be sure to reply as fast as possible
+    </p>
+  </div>
+
+  {/* Contact Form Section */}
+  <div className="contact-form-container">
+    <h1 className="form-title">Message Us</h1>
+    
+    <form className="contact-form" onSubmit={onSubmit}>
+      <div className="name-email-row">
+        <div>
+          <input type="text" placeholder="Full name" name="name" required />
         </div>
-      </section>
-
-      {/* Legal Cards */}
-      <section className="legal-cards">
-        <div className="container">
-          <div className="cards-grid">
-            <div className="legal-card">
-              <div className="icon-circle">{/* icon-document */}</div>
-              <h4>Terms of Service</h4>
-              <>
-                Read the Terms of Service and License Agreement for Blockit as well as our Blockit App & Developer Agreements.
-              </>
-              <ul>
-                <li><span>{/* icon-pdf */}</span> License Agreement</li>
-                <li><span>{/* icon-pdf */}</span> Term of Services for Blockit Trade</li>
-              </ul>
-            </div>
-
-            <div className="legal-card">
-              <div className="icon-circle">{/* icon-globe */}</div>
-              <h4>Policies</h4>
-              <p>
-                Find out more about what information we collect at Blockit, how we use it, and what control you have over your data.
-              </p>
-              <ul>
-                <li><span>{/* icon-pdf */}</span> Privacy Statement</li>
-
-
-                </ul>
-            </div>
-
-            <div className="legal-card">
-              <div className="icon-circle">{/* icon-shield */}</div>
-              <h4>Security</h4>
-              <p>
-                Learn more about how we keep your work and personal data safe when you're using our services.
-              </p>
-              <ul>
-                <li><span>{/* icon-pdf */}</span> Blockit Trade Security</li>
-                <li><span>{/* icon-pdf */}</span> Responsible Disclosure Policy</li>
-              </ul>
-            </div>
-          </div>
+        <div>
+          <input type="email" placeholder="Email address" name="email" required />
         </div>
-      </section>
+      </div>
 
-      {/* Knowledge Section */}
-      <section className="knowledge">
-        <div className="container">
-          <h2>
-            Knowledge <span className="highlight">is a wise</span><br />
-            investment
-          </h2>
-          <p>
-            By combining easy-to-understand information with actionable insights, Our company helps make the market seem less daunting—and more approachable.
-          </p>
-          <div className="action-buttons">
-            <button className="btn-learn">LEARN →</button>
-            <button className="btn-understand">UNDERSTAND</button>
-            <button className="btn-trade">TRADE</button>
-          </div>
-        </div>
-      </section>
+      <div>
+        <input type="text" placeholder="Subject" name="subject" />
+      </div>
 
-      {/* Footer */}
-      <footer className="about-footer">
-        <div className="container footer-grid">
-          <div className="footer-col">
-            <h5>Company</h5>
-            <p className="address">
-              ADDRESS<br />
-              1041 Elm St, Dallas,<br />
-              TX
-            </p>
-          </div>
-          <div className="footer-col">
-            <h5>Legal</h5>
-            <ul>
-              <li>Terms & Conditions</li>
-              <li>Privacy & Policy</li>
-            </ul>
-          </div>
-          <div className="footer-col">
-            <h5>Contact</h5>
-            <p className="email">support@capitalgrowinvest-ment.com</p>
-            <p className="phone">+1 (272) 432-1134</p>
-          </div>
-        </div>
+      <div>
+        <textarea name="message" placeholder="Message" required></textarea>
+      </div>
 
-        <div className="risk-warning">
-          <strong>RISK WARNING:</strong> Trading derivatives and leveraged products carries a high level of risk, including the risk of losing substantially more than your initial investment. It is not suitable for everyone...
-        </div>
+      <button type="submit" className="submit-button">
+        Send Message
+      </button>
 
-        <div className="copyright">
-          © capitalgrowinvest-ment.com 2014–2023. All rights reserved.
-        </div>
-      </footer>
-    </div>
+      {result && <p className="result-message">{result}</p>}
+    </form>
+  </div>
+
+  {/* Risk Warning Footer */}
+  <div className="risk-warning">
+    <strong>Risk warning</strong>
+    <p>
+      The financial products offered via this website include digitals, contracts for difference (CFDs), and other complex derivatives and financial products. Trading CFDs carries a high level of risk since leverage can work both to your advantage and disadvantage. As a result, the products offered on this website may not be suitable for all investors because of the risk of losing all of your invested capital. You should never invest money that you cannot afford to lose, and never trade with borrowed money. Before trading in the complex financial products offered, please be sure to understand the risks involved.
+    </p>
+  </div>
+</div>
+    </>
   );
 }
-
-export default Contact;
