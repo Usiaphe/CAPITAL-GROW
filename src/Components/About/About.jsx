@@ -18,7 +18,6 @@ const About = () => {
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated) {
           setHasAnimated(true);
-
           let start = 0;
           const end = 7;
           const duration = 2000;
@@ -279,7 +278,7 @@ const About = () => {
             Discover the world of CFD trading. The ins & outs of the CFD market,
             relevant information, and market dynamics.
           </p>
-
+              
           <button className="course-link">
             Enter Course →
           </button>

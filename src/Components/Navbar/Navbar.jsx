@@ -1,133 +1,50 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "./Navbar.css";
+// Navbar.jsx
+import React, { useState, useEffect } from 'react';
+import './Navbar.css';
+import { Link } from "react-router-dom";
 
-const forexData = [
-  { pair: "USDJPY", price: "109.59", up: true },
-  { pair: "USDCAD", price: "1.3172", up: true },
-  { pair: "USDCHF", price: "0.9776", up: true },
-  { pair: "AUDUSD", price: "0.67064", up: false },
-  { pair: "GBPJPY", price: "141.91", up: true },
-  { pair: "XAUUSD", price: "1478.81", up: true },
-];
 
-const navLinks = ["Home", "About", "Contact", "FAQ", "Privacy"];
+const Navbar = () => {
 
-export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navigate = useNavigate(); // ✅ CORRECT NAVIGATION
 
   return (
-    <>
-      {/* Forex Ticker */}
-      <div className="ticker-container">
-        <div className="ticker">
-          {[...forexData, ...forexData].map((item, i) => (
-            <div key={i} className="ticker-item">
-              <span className="pair">{item.pair}</span>
-              <span className="price">{item.price}</span>
-              <span className={`change ${item.up ? "up" : "down"}`}>
-                {item.up ? "Up" : "Down"}
-              </span>
-            </div>
-          ))}
+     <>
+    <header className="navbar">
+      
+      
+      {/* Main Navigation - App-Like on Mobile */}
+      <div className="main-nav">
+        <div className="logo">
+          <span className="logo-icon">∞</span>
+          <div className="logo-text">
+            <span>CAPITAL</span> <span className="grow">GROW</span>
+          </div>
+        </div>
+<nav className="menu">
+  <Link to="/home">Home</Link>
+  <Link to="/about">About</Link>
+  <Link to="/contact">Contact</Link>
+  <Link to="/faq">FAQ</Link>
+  <Link to="/privacy">Privacy & Policy</Link>
+</nav>
+
+        <div className="auth-buttons">
+          <Link to="/login">
+  <button className="login">LOGIN</button>
+</Link>
+
+<span className="separator">|</span>
+
+<Link to="/SignUPs">
+  <button className="register">REGISTER</button>
+</Link>
         </div>
       </div>
-
-      {/* Main Header */}
-      <header className="main-header">
-        <div className="header-content">
-          {/* Logo */}
-          <div className="logo">
-            <div className="logo-icon">G</div>
-            <div className="logo-text">
-              <h1>
-                <span className="capital">CAPITAL</span>
-                <span className="grow"> GROW</span>
-              </h1>
-              <p className="investment">INVESTMENT</p>
-            </div>
-          </div>
-
-          {/* Desktop Nav */}
-          <nav className="desktop-nav">
-            {navLinks.map((link) => {
-              const path = link.toLowerCase();
-              return (
-                <Link
-                  key={link}
-                  to={path === "home" ? "/" : `/${path}`}
-                >
-                  {link}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Desktop Buttons */}
-          <button
-            className="desktop-btn"
-            onClick={() => navigate("/login")}
-          >
-            Login Account
-          </button>
-
-          <button
-            className="desktop-btn"
-            onClick={() => navigate("/register")}
-          >
-            Open Account
-          </button>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            className="mobile-menu-btn"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="mobile-menu">
-            {navLinks.map((link) => {
-              const path = link.toLowerCase();
-              return (
-                <Link
-                  key={link}
-                  to={path === "home" ? "/" : `/${path}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link}
-                </Link>
-              );
-            })}
-
-            <button
-              className="mobile-login-btn"
-              onClick={() => {
-                navigate("/register");
-                setMobileMenuOpen(false);
-              }}
-            >
-              Register
-            </button>
-
-            <button
-              className="mobile-login-btn"
-              onClick={() => {
-                navigate("/login");
-                setMobileMenuOpen(false);
-              }}
-            >
-              Login
-            </button>
-          </div>
-        )}
-      </header>
-    </>
+      
+    </header>
+  
+        </>
   );
-}
+};
+
+export default Navbar;

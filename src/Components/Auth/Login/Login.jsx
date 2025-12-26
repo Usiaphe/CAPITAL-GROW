@@ -1,62 +1,37 @@
-import React, { useState } from "react";
+import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 
-
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [form, setForm] = useState({ identity: "", password: "" });
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) return alert(error.message);
 
-    const user = users.find(
-      (u) =>
-        (u.email === form.identity || u.username === form.identity) &&
-        u.password === form.password
-    );
+    // Get user role
+    const { data: profile } = await supabase
+      .from("users")
+      .select("role")
+      .eq("id", data.user.id)
+      .single();
 
-    if (!user) {
-      alert("Invalid credentials");
-      return;
-    }
-
-    localStorage.setItem("currentUser", JSON.stringify(user));
-    navigate("/dashboard");
+    navigate(profile.role === "admin" ? "/admin/dashboard" : "/user/dashboard");
   };
 
   return (
-    <div className="auth-page">
-      <form className="auth-form" onSubmit={handleSubmit}>
-        <h2>Login</h2>
-
-        <input
-          name="identity"
-          placeholder="Email or Username"
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-          required
-        />
-
-        <button type="submit">Login</button>
-
-        <p onClick={() => navigate("/register")} className="switch">
-          Don’t have an account? Register
-        </p>
-      </form>
-    </div>
+    <form onSubmit={handleLogin} style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>Login</h2>
+      <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <br /><br />
+      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <br /><br />
+      <button type="submit">Login</button>
+    </form>
   );
 };
 

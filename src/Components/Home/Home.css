@@ -1,0 +1,383 @@
+.hero {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+  background: black;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Slide 0 */
+.hero-slide.slide-0 {
+  background-image: url('../../assets/hero3.jpg');
+}
+
+/* Slide 1 */
+.hero-slide.slide-1 {
+  background-image: url('../../assets/hero2.jpg');
+}
+
+.hero-slide.active {
+  opacity: 1;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+
+   /* dark overlay for readability */
+}
+
+.content {
+  position: relative;
+  z-index: 3;
+  max-width: 600px;
+  padding: 120px 80px;
+  color: white;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #ddd;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 14px 28px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.primary {
+  background: #c62828;
+  color: white;
+}
+
+.secondary {
+  background: #b71c1c;
+  color: white;
+}
+
+.risk {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 100px 30px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero{
+    height: 50vh;
+  }
+}
+
+/* Updated LessCommission.css - Optimized for mobile (all 6 items visible at once on phone) */
+
+
+
+
+
+.mobile-bar {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #b40000, #3a0000);
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* Left text */
+.left-text h2 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Vertical divider */
+.divider {
+  width: 1px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 14px;
+}
+
+/* Scrollable icons */
+.items-wrapper {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.items-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #000;
+  color: #ff0000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+
+
+.steps-section {
+  background: #000;
+  padding: 80px 20px;
+  color: #fff;
+}
+
+/* Cards container */
+.cards {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Card base */
+.step-card {
+  width: 320px;
+  background: radial-gradient(circle at top, #111, #000);
+  border: 2px solid #b00000;
+  border-radius: 18px;
+  padding: 30px 25px;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.15);
+
+  /* Animation start state */
+  transform: scale(0.85);
+  opacity: 0;
+  transition: all 0.7s ease;
+}
+
+/* Animate in */
+.step-card.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Headings */
+.step-card h2 {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+/* List */
+.step-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 25px;
+}
+
+.step-card li {
+  margin-bottom: 12px;
+  padding-left: 22px;
+  position: relative;
+  font-size: 14px;
+}
+
+.step-card li::before {
+  content: "✔";
+  color: #ff0000;
+  position: absolute;
+  left: 0;
+}
+
+/* Button */
+.step-card button {
+  background: linear-gradient(90deg, #f71111, #570505);
+  border: none;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Mobile stack */
+@media (max-width: 768px) {
+  .cards {
+    flex-direction: flex;
+    align-items: start;
+  }
+}
+
+
+.card-wrapper {
+  position: relative;
+  padding-top: 90px; /* reserve space for stacked badge */
+}
+
+/* Stacked text above card */
+.card-badge {
+  position: absolute;
+  top: 20px; /* now sits inside reserved space */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 500;
+}
+
+.card-badge span {
+  display: block;
+}
+
+
+
+/* Card */
+.step-card {
+  width: 280px;
+  background: radial-gradient(circle at top, #111, #000);
+  border: 2px solid #b00000;
+  border-radius: 18px;
+  padding: 30px 22px;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.15);
+
+  transform: scale(0.85);
+  opacity: 0;
+  transition: all 0.7s ease;
+}
+
+.step-card.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+
+@media (max-width: 480px) {
+  .card-wrapper {
+    padding-top: 75px;
+  }
+
+  .card-badge {
+    font-size: 12px;
+    top: 18px;
+  }
+}
+
+
+
+.tech-container p {
+  font-size: clamp(14px, 2.5vw, 18px);
+  line-height: 1.7;
+  color: #dcdcdc;
+  margin-bottom: 22px;
+}
+
+/* Mobile spacing */
+@media (max-width: 480px) {
+  .tech-section {
+    padding: 60px 16px;
+  }
+}
+
+.tech-section {
+  background: #000;
+  color: #fff;
+  padding: 80px 20px;
+}
+
+.tech-container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Start state (small) */
+.tech-container h1,
+.tech-container p {
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+/* Visible state */
+.tech-container h1.show,
+.tech-container p.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Heading */
+.tech-container h1 {
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 30px;
+}
+
+/* Paragraphs */
+.tech-container p {
+  font-size: clamp(14px, 2.5vw, 18px);
+  line-height: 1.7;
+  color: #dcdcdc;
+  margin-bottom: 22px;
+}
+
+@media (max-width: 480px) {
+  .tech-section {
+    padding: 60px 16px;
+  }
+}
+
+
+
+
+
