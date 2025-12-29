@@ -1,38 +1,75 @@
-import { useState } from "react";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import './Login.css'
 
-import { useNavigate } from "react-router-dom";
+export default function Login() {
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setLoading(true)
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+    const username = e.target.username.value
+    const password = e.target.password.value
 
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) return alert(error.message);
+    if (!username || !password) {
+      alert('Please fill in all fields')
+      setLoading(false)
+      return
+    }
 
-    // Get user role
-    const { data: profile } = await supabase
-      .from("users")
-      .select("role")
-      .eq("id", data.user.id)
-      .single();
-
-    navigate(profile.role === "admin" ? "/admin/dashboard" : "/user/dashboard");
-  };
+    // Here we will connect to Supabase later
+    // For now, simulate success
+    alert(`Welcome back, ${username}!`)
+    navigate('/user/dashboard')
+    setLoading(false)
+  }
 
   return (
-    <form onSubmit={handleLogin} style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Login</h2>
-      <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <br /><br />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <br /><br />
-      <button type="submit">Login</button>
-    </form>
-  );
-};
+    <div className="login-page">
+      <div className="login-box">
+        <h1 className="login-title">
+          AUTO-<span>CAPITAL</span>
+        </h1>
+        <h2 className="login-subtitle">Log In</h2>
 
-export default Login;
+        <form onSubmit={handleSubmit} className="login-form">
+          <div>
+            <label className="login-label">
+              Username <span>*</span>
+            </label>
+            <input type="text" name="username" required className="login-input" />
+          </div>
+
+          <div>
+            <label className="login-label">
+              Password <span>*</span>
+            </label>
+            <input type="password" name="password" placeholder="Enter Password" required className="login-input" />
+          </div>
+
+          <div className="login-options">
+            <label>
+              <input type="checkbox" />
+              Remember me
+            </label>
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <button type="submit" disabled={loading} className="login-button">
+            Sign in
+          </button>
+        </form>
+
+        <p className="login-signup">
+          Don't have an account? <a href="/register">Sign Up</a>
+        </p>
+
+        <p className="login-copyright">
+          © Copyright 2023 World of Forex. All Rights Reserved.
+        </p>
+      </div>
+    </div>
+  )
+}

@@ -35,7 +35,7 @@ const Navbar = () => {
 
 <span className="separator">|</span>
 
-<Link to="/SignUPs">
+<Link to="/Register">
   <button className="register">REGISTER</button>
 </Link>
         </div>

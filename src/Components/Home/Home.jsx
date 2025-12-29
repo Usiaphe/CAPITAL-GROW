@@ -230,6 +230,57 @@ const Home = () => {
           </p>
         </div>
       </section>
+
+      <section className="analysis-section">
+      <div className="analysis-cards">
+
+        {/* CARD 1 */}
+        <div className="analysis-card scroll-card">
+          <span className="card-line"></span>
+          <h3>Economic</h3>
+          <p className="card-sub">Analysis</p>
+          <p className="card-text">
+            Stay ahead of the markets with world-leading market analysis
+            through daily webinars by industry experts.
+          </p>
+          <div className="card-footer">
+            <span>READ ANALYSIS</span>
+            <button className="card-btn">Weekly Update</button>
+          </div>
+        </div>
+
+        {/* CARD 2 */}
+        <div className="analysis-card scroll-card delay-1">
+          <span className="card-line"></span>
+          <h3>Technical</h3>
+          <p className="card-sub">Analysis</p>
+          <p className="card-text">
+            Access the financial markets with an account catered to your
+            needs and benefit from good conditions.
+          </p>
+          <div className="card-footer">
+            <span>READ ANALYSIS</span>
+            <button className="card-btn">Daily Update</button>
+          </div>
+        </div>
+
+        {/* CARD 3 */}
+        <div className="analysis-card scroll-card delay-2">
+          <span className="card-line"></span>
+          <h3>Sentiment</h3>
+          <p className="card-sub">Analysis</p>
+          <p className="card-text">
+            Track trader sentiment and positioning across global
+            markets to stay one step ahead.
+          </p>
+          <div className="card-footer">
+            <span>READ ANALYSIS</span>
+            <button className="card-btn">Live Feed</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
     </>
   );
 };
