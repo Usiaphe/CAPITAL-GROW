@@ -105,6 +105,7 @@ const About = () => {
           <div className="offerings-layout">
             <div className="offer-card offer-invest">
               <img className="icons" src={chart2} alt="" />
+              
               <h3>Investing ›</h3>
               <hr className="card-line" />
               <p>
