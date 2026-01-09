@@ -3,15 +3,18 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 
+import authRoutes from "./routes/auth.js";
+
+app.use("/api/auth", authRoutes);
+
 dotenv.config();
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Backend is running ✅");
+  res.send("Backend running ✅");
 });
 
 mongoose
@@ -19,8 +22,6 @@ mongoose
   .then(() => console.log("MongoDB connected ✅"))
   .catch(err => console.error("MongoDB error ❌", err));
 
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
 });
-

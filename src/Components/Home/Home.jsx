@@ -1,6 +1,16 @@
 import { useEffect, useState, useRef } from "react";
 import "./Home.css";
-import ctrader from "../../assets/ctrader.jpg"
+import ctrader from "../../assets/ctrader.jpg";
+import balance from "../../assets/balance.jpg";
+import phila from "../../assets/phila.jpg";
+import usa1 from "../../assets/usa1.jpg";
+import usa3 from "../../assets/usa3.jpg";
+import zar from "../../assets/zar.jpg";
+
+
+
+
+
 
 const slides = [
   {
@@ -752,7 +762,7 @@ const Home = () => {
     <div className="platform-image scroll-reveal">
       {/* PLACE APP PHONE IMAGE HERE */}
       {/* <img src={appImage} alt="Trading App" /> */}
-      <div className="image-placeholder">APP IMAGE</div>
+  <img className="image-placeholder" src={balance} alt="" />
     </div>
 
     {/* RIGHT — CONTENT */}
@@ -1037,7 +1047,7 @@ const Home = () => {
               {/* === PUT YOUR IMAGE HERE === */}
               {/* <img src="/path-to-hunter-image.jpg" alt="Hunter Hamilton" className="profile-img" /> */}
               {/* Placeholder circle if no image yet */}
-              <div className="profile-placeholder"></div>
+               <img className="profile-placeholder" src={usa3} alt="" />
             </div>
             <div className="card-body">
               <p className="testimonial-text">
@@ -1055,7 +1065,7 @@ const Home = () => {
             <div className="card-header">
               {/* === PUT YOUR IMAGE HERE === */}
               {/* <img src="/path-to-charlotte-image.jpg" alt="Charlotte" className="profile-img" /> */}
-              <div className="profile-placeholder"></div>
+             <img className="profile-placeholder" src={zar} alt="" />
             </div>
             <div className="card-body">
               <p className="testimonial-text">
@@ -1073,7 +1083,7 @@ const Home = () => {
             <div className="card-header">
               {/* === PUT YOUR IMAGE HERE === */}
               {/* <img src="/path-to-violante-image.jpg" alt="Violante Valeria" className="profile-img" /> */}
-              <div className="profile-placeholder"></div>
+            <img className="profile-placeholder" src={phila} alt="" />
             </div>
             <div className="card-body">
               <p className="testimonial-text">
@@ -1089,9 +1099,11 @@ const Home = () => {
           {/* Testimonial 4 */}
           <div className="testimonial-card scroll-reveal">
             <div className="card-header">
+
               {/* === PUT YOUR IMAGE HERE === */}
+
               {/* <img src="/path-to-christopher-image.jpg" alt="Christopher Pagao" className="profile-img" /> */}
-              <div className="profile-placeholder"></div>
+           <img className="profile-placeholder" src={usa1} alt="" />
             </div>
             <div className="card-body">
               <p className="testimonial-text">
