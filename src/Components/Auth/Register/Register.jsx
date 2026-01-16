@@ -1,43 +1,73 @@
-import { useSignUp } from "@clerk/clerk-react";
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-export default function Register() {
-  const { signUp, isLoaded } = useSignUp();
+const Register = () => {
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const [data, setData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const registerUser = async (e) => {
     e.preventDefault();
-    const fullName = e.target.fullName.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
-    if (!isLoaded) return;
+    const { name, email, password } = data;
 
     try {
-      // Create user in Clerk
-      const { userId } = await signUp.create({
-        emailAddress: email,
+      const res = await axios.post('http://localhost:8000/register', {
+        name,
+        email,
         password,
       });
 
-      // Save extra info in MongoDB
-      await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ clerkId: userId, fullName, email }),
-      });
+      // handle errors from backend
+      if (res.data.error) {
+        toast.error(res.data.error);
+      } else {
+        setData({ name: '', email: '', password: '' });
+        toast.success('Registration successful! Welcome!');
 
-      alert("Registered successfully!");
-    } catch (err) {
-      console.error(err);
-      alert("Error registering");
+        // navigate after registration
+        navigate('/login');
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error('Something went wrong. Try again.');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="fullName" placeholder="Full Name" required />
-      <input name="email" placeholder="Email" required />
-      <input name="password" placeholder="Password" type="password" required />
-      <button type="submit">Register</button>
+    <form onSubmit={registerUser}>
+      <label>Name</label>
+      <input
+        type="text"
+        placeholder="Enter name..."
+        value={data.name}
+        onChange={(e) => setData({ ...data, name: e.target.value })}
+      />
+
+      <label>Email</label>
+      <input
+        type="email"
+        placeholder="Enter email..."
+        value={data.email}
+        onChange={(e) => setData({ ...data, email: e.target.value })}
+      />
+
+      <label>Password</label>
+      <input
+        type="password"
+        placeholder="Enter password..."
+        value={data.password}
+        onChange={(e) => setData({ ...data, password: e.target.value })}
+      />
+
+      <button type="submit">Submit</button>
     </form>
   );
-}
+};
+
+export default Register;

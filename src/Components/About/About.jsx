@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./About.css";
 import chart2 from "../../assets/chart2.png"
-import three from "../../assets/three.jpg"
-import smart from "../../assets/smart.jpg"
-import wealth  from "../../assets/wealth.jpg"
-import hannd from "../../assets/hannd.jpg"
-import portfolo from "../../assets/portfolo.png"
 
 
 const About = () => {
@@ -41,30 +36,59 @@ const About = () => {
     return () => observer.disconnect();
   }, [hasAnimated]);
 
+
+
+  
+    // Scroll Reveal Animation with Intersection Observer
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+            } else {
+              entry.target.classList.remove('revealed'); // Re-triggers on scroll up
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+          rootMargin: '0px 0px -50px 0px',
+        }
+      );
+  
+      document.querySelectorAll('.scroll-reveal').forEach((el) => {
+        observer.observe(el);
+      });
+  
+      return () => observer.disconnect();
+    }, []);
+  
+
   return (
     <>
       {/* CLIENT SECTION */}
       <section ref={sectionRef} className="client-section">
         <div className="container">
-          <div className="grid">
-            <div className="left-column">
-              <h1>
+          <div className="grid scroll-reveal">
+            <div className="left-column scroll-reveal">
+              <h1 className="scroll-reveal">
                 Putting our clients first since <span className="year">2016</span>
               </h1>
 
-              <p>
+              <p className="scroll-reveal">
                 For more than 5 years, we've been empowering clients by helping
                 them take control of their financial lives.
               </p>
 
-              <h2>Number speaks</h2>
+              <h2 className="scroll-reveal">Number speaks</h2>
 
-              <p className="big-text">
+              <p className="big-text scroll-reveal">
                 We are always ready{" "}
                 <span className="highlight">for a challenge.</span>
               </p>
 
-              <button className="learn-btn">Learn more</button>
+              <button className="learn-btn scroll-reveal">Learn more</button>
             </div>
 
             <div className="right-column">
@@ -73,7 +97,7 @@ const About = () => {
                 <p>Trading instruments</p>
               </div>
 
-              <p className="description">
+              <p className="description scroll-reveal">
                 The foreign exchange market is the largest financial market in
                 the world and has a variety of financial instruments to trade
                 daily.
@@ -84,7 +108,7 @@ const About = () => {
       </section>
 
       {/* RELATIONSHIP SECTION */}
-      <section className="relationship-section">
+      <section className="relationship-section scroll-reveal">
         <h1>A relationship on your terms.</h1>
         <p>Work with us the way you want.</p>
 
@@ -99,72 +123,75 @@ const About = () => {
         </p>
       </section>
 
-      {/* OFFERINGS SECTION */}
-      <section className="offerings-wrapper">
-        <div className="inner-wrapper">
-          <div className="offerings-layout">
-            <div className="offer-card offer-invest">
-              <img className="icons" src={chart2} alt="" />
-              
-              <h3>Investing ›</h3>
-              <hr className="card-line" />
-              <p>
-                A wide selection of investment products to help build diversified
-                portfolios.
-              </p>
-            </div>
 
-            <div className="offer-card offer-trade">
-              <img className="icons" src={chart2} alt="" />
-              <h3>Trading ›</h3>
-              <hr className="card-line" />
-              <p>
-                Powerful tools, market insights, and professional support.
-              </p>
-            </div>
 
-            <div className="offer-card offer-wealth">
-              <img className="icons" src={chart2} alt="" />
-              <h3>Wealth management ›</h3>
-              <hr className="card-line" />
-              <p>
-                Dedicated financial consultants to help reach your goals.
-              </p>
-            </div>
 
-            <div className="offer-card offer-advisory">
-              <img className="icons" src={chart2} alt="" />
-              <h3>Investment advisory ›</h3>
-              <hr className="card-line" />
-              <p>
-                A wide range of strategies from seasoned portfolio managers.
-              </p>
-            </div>
+<section className="service-section">
+  <div className="service-grid">
 
-            <div className="offer-card offer-smart">
-              <h3>Smart portfolio ›</h3>
-              <hr className="card-line" />
-              <p>
-                A revolutionary, fully automated investment advisory service.
-              </p>
-            </div>
+    <div className="service-card green scroll-reveal">
+      <div className="service-icon">🌱</div>
+      <h3>Investing <span>›</span></h3>
+      <div className="service-line"></div>
+      <p>
+        A wide selection of investment product to help build diversified portfolio
+      </p>
+    </div>
 
-            <div className="offer-card offer-mutual">
-              <h3>Mutual fund advisor ›</h3>
-              <hr className="card-line" />
-              <p>
-                Specialized guidance from independent local advisors for
-                high-net-worth investors.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="service-card blue scroll-reveal">
+      <div className="service-icon">📊</div>
+      <h3>Trading <span>›</span></h3>
+      <div className="service-line"></div>
+      <p>
+        Powerful trading tools, resources, insight and support
+      </p>
+    </div>
+
+    <div className="service-card purple scroll-reveal">
+      <div className="service-icon">📈</div>
+      <h3>Wealth management <span>›</span></h3>
+      <div className="service-line"></div>
+      <p>
+        Dedicated financial consultant to help reach your own specific goals
+      </p>
+    </div>
+
+    <div className="service-card dark scroll-reveal">
+      <div className="service-icon">👥</div>
+      <h3>Investment advisory <span>›</span></h3>
+      <div className="service-line"></div>
+      <p>
+        A wide selection of investing strategies from seasoned portfolio managers
+      </p>
+    </div>
+
+    <div className="service-card gray scroll-reveal">
+      <div className="service-icon">🤖</div>
+      <h3>Smart portfolio <span>›</span></h3>
+      <div className="service-line"></div>
+      <p>
+        A revolutionary, fully-automated investment advisory services
+      </p>
+    </div>
+
+    <div className="service-card red scroll-reveal">
+      <div className="service-icon">🤝</div>
+      <h3>Mutual fund advisor <span>›</span></h3>
+      <div className="service-line"></div>
+      <p>
+        Specialized guidance from independent local advisor for high-net-worth investors
+      </p>
+    </div>
+
+  </div>
+</section>
+      
+
 
       {/* WHY TRADE SECTION */}
       <section className="whytrade">
-        <div className="whytrade-container">
-          <div className="whytrade-left">
+        <div className="whytrade-container scroll-reveal">
+          <div className="whytrade-left scroll-reveal">
             <div className="icon-box">
               <span className="icon">$</span>
             </div>
@@ -222,7 +249,7 @@ const About = () => {
           </div>
         </div>
 
-        <div className="cta">
+        <div className="cta scroll-reveal">
           <p>
             Get up to <strong>£600</strong> plus 60 days of commission-free stocks
             and forex trades
@@ -232,8 +259,8 @@ const About = () => {
       </section>
        
 
-<section className="courses">
-      <div className="courses-list">
+ <section className="courses">
+      <div className="courses-list scroll-reveal">
         {/* Item 1 */}
         <div className="course-item">
           <div className="course-left">
@@ -241,53 +268,53 @@ const About = () => {
             <h3>Beginner Course</h3>
           </div>
 
-          <p className="course-desc">
+          <p className="course-desc scroll-reveal">
             Learn the basic concepts of forex trading, what this market is all
             about, and why you should be a part of it.
           </p>
 
-          <button className="course-link">
+          <button className="course-link scroll-reveal">
             Enter Course →
           </button>
         </div>
 
         {/* Item 2 */}
-        <div className="course-item">
-          <div className="course-left">
-            <div className="course-icon">🛠️</div>
+        <div className="course-item scroll-reveal">
+          <div className="course-left scroll-reveal">
+            <div className="course-icon scroll-reveal">🛠️</div>
             <h3>Trading Tools</h3>
           </div>
 
-          <p className="course-desc">
+          <p className="course-desc scroll-reveal">
             Familiarize yourself with advanced strategies and Btrade’s trading
             toolset. Take your trading to the next level.
           </p>
 
-          <button className="course-link">
+          <button className="course-link scroll-reveal">
             Enter Course →
           </button>
         </div>
 
         {/* Item 3 */}
-        <div className="course-item">
+        <div className="course-item scroll-reveal">
           <div className="course-left">
-            <div className="course-icon">📈</div>
+            <div className="course-icon scroll-reveal">📈</div>
             <h3>Stocks and CFDs</h3>
           </div>
 
-          <p className="course-desc">
+          <p className="course-desc scroll-reveal">
             Discover the world of CFD trading. The ins & outs of the CFD market,
             relevant information, and market dynamics.
           </p>
               
-          <button className="course-link">
+          <button className="course-link scroll-reveal">
             Enter Course →
           </button>
         </div>
       </div>
 
       {/* Buttons */}
-      <div className="courses-buttons">
+      <div className="courses-buttons scroll-reveal">
         <button>Fast Academy</button>
         <button>Video Tutorials</button>
         <button>Course</button>
@@ -297,24 +324,24 @@ const About = () => {
       </div>
 
       {/* Bottom Text */}
-      <p className="courses-note">
+      <p className="courses-note scroll-reveal">
         We're constantly updating our roadmap to bring transparency for our
         users and to get your feedback – please tell us what is important for
         you!
       </p>
     </section>
 
-<section className="roadmap">
+     <section className="roadmap scroll-reveal">
         <div className="roadmap-line"></div>
 
         <div className="roadmap-items">
           {/* Item 1 */}
-          <div className="roadmap-item">
-            <div className="icon-circle">
+          <div className="roadmap-item scroll-reveal">
+            <div className="icon-circle scroll-reveal">
               <span>📋</span>
             </div>
-            <h4>Q4 2019 <span className="badge completed">completed</span></h4>
-            <div className="card">
+            <h4>Q4 2019 <span className="badge completed scroll-reveal">completed</span></h4>
+            <div className="card scroll-reveal">
               <ul>
                 <li>Wireframe</li>
                 <li>Design</li>
@@ -325,11 +352,11 @@ const About = () => {
 
           {/* Item 2 */}
           <div className="roadmap-item">
-            <div className="icon-circle">
+            <div className="icon-circle scroll-reveal">
               <span>⚙️</span>
             </div>
             <h4>Q2 2014 – 2022 <span className="badge progress">on progress</span></h4>
-            <div className="card">
+            <div className="card scroll-reveal">
               <ul>
                 <li>Chart with base functionality</li>
                 <li>Launching plans and billings</li>
@@ -344,8 +371,8 @@ const About = () => {
             <div className="icon-circle">
               <span>🧪</span>
             </div>
-            <h4>Q3 2014 – 2022 <span className="badge planned">planned</span></h4>
-            <div className="card">
+            <h4>Q3 2014 – 2022 <span className="badge planned scroll-reveal">planned</span></h4>
+            <div className="card  scroll-reveal">
               <ul>
                 <li>Extensions for popular browsers</li>
                 <li>List view for tasks</li>
@@ -359,8 +386,8 @@ const About = () => {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <div className="footer-top">
+      <footer className="footer scroll-reveal">
+        <div className="footer-top scroll-reveal">
           <div>
             <h5>Company</h5>
             <p>1041 Elm St, Dallas, TX</p>

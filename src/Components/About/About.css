@@ -949,3 +949,158 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ===== BLACK SECTION ===== */
+.service-section {
+  background: #000;
+  padding: 80px 6%;
+}
+
+/* ===== GRID ===== */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* ===== CARD BASE ===== */
+.service-card {
+  border-radius: 16px;
+  padding: 28px;
+  color: #fff;
+  min-height: 260px;
+  position: relative;
+  overflow: hidden;
+
+  /* reveal default state */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s ease;
+}
+
+/* reveal active */
+.service-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== ICON ===== */
+.service-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 22px;
+}
+
+/* ===== TITLE ===== */
+.service-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.service-card h3 span {
+  font-size: 22px;
+  opacity: 0.9;
+}
+
+/* ===== DIVIDER ===== */
+.service-line {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.3);
+  margin-bottom: 14px;
+}
+
+/* ===== TEXT ===== */
+.service-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* ===== CARD COLORS ===== */
+.service-card.green {
+  background: #2bbf9f;
+}
+
+.service-card.blue {
+  background: #4a86dc;
+}
+
+.service-card.purple {
+  background: #9b63b6;
+}
+
+.service-card.dark {
+  background: #34495e;
+}
+
+.service-card.gray {
+  background: #95a5a6;
+  color: #111;
+}
+
+.service-card.gray p,
+.service-card.gray h3 {
+  color: #111;
+}
+
+.service-card.red {
+  background: #c40000;
+}
+
+/* ===== MOBILE (2 × 2) ===== */
+@media (max-width: 900px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .service-section {
+    padding: 60px 5%;
+  }
+
+  .service-card {
+    padding: 22px;
+    min-height: 230px;
+  }
+
+  .service-card h3 {
+    font-size: 18px;
+  }
+
+  .service-card p {
+    font-size: 13px;
+  }
+}
+
+
+/* ===== ARROW BASE ===== */
+.service-card h3 span {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  display: inline-block;
+}
+
+/* ===== DESKTOP HOVER ===== */
+@media (hover: hover) {
+  .service-card:hover h3 span {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+}
+
+/* ===== MOBILE TAP (ACTIVE) ===== */
+.service-card:active h3 span {
+  transform: translateX(10px);
+}
