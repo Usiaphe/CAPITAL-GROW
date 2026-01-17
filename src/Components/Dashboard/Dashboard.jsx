@@ -1,14 +1,15 @@
-import {useContext} from 'react';
-import {userContext} from "../../Context/userContext";
+import { useContext } from 'react';
+import { UserContext } from "../../Context/userContext";
 
 const Dashboard = () => {
-    const {user} = useContext(userContext)
-  return (
-    <>
-    <h1>dashboard</h1>
-    {!!user &&(<h1>h1 {user.name}!</h1>)}
-    </>
-  )
-}
+    const { user } = useContext(UserContext);
 
-export default Dashboard
+    return (
+        <>
+            <h1>dashboard</h1>
+            {!!user && <h1>hi {user.name}!</h1>}
+        </>
+    );
+};
+
+export default Dashboard;
