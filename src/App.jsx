@@ -22,12 +22,12 @@ function App() {
 
   // Pages where Navbar should NOT show
   const hideNavbarRoutes = ["/login", "/register", "/dashboard"];
-  const showNavbar = !hideNavbarRoutes.includes(location.pathname);
+
+  // Check if the current path starts with any of the hide paths
+  const showNavbar = !hideNavbarRoutes.some(route => location.pathname.startsWith(route));
 
   return (
-    <>
     <UserContextProvider>
-
       {showNavbar && <Navbar />}
       <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
 
@@ -43,8 +43,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
-      </UserContextProvider>
-    </>
+    </UserContextProvider>
   );
 }
 

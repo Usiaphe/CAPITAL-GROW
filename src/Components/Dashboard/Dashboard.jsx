@@ -6,10 +6,13 @@ const Dashboard = () => {
 
     return (
         <>
+         
             <h1>dashboard</h1>
             {!!user && <h1>hi {user.name}!</h1>}
+             
         </>
     );
 };
+
 
 export default Dashboard;
