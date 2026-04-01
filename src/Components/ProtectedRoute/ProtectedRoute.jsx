@@ -1,28 +1,27 @@
-import { useUser, RedirectToSignIn } from "@clerk/clerk-react";
-import { Navigate } from "react-router-dom";
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { UserContext } from '../../Context/userContext';
 
-// ---------- Admin Protected Route ----------
-export const ProtectedAdminRoute = ({ children }) => {
-  const { user, isLoaded } = useUser();
+// Protected route for regular users
+export const ProtectedUserRoute = ({ children }) => {
+    const { user, loading } = useContext(UserContext);
 
-  if (!isLoaded) return <div style={{ textAlign: "center", marginTop: "40px" }}>Loading...</div>;
+    if (loading) return <div style={{ textAlign: 'center', marginTop: '40px' }}>Loading...</div>;
 
-  if (!user) return <RedirectToSignIn />;
+    if (!user) return <Navigate to="/login" replace />;
 
-  if (user.publicMetadata?.role !== "admin") return <Navigate to="/user/dashboard" replace />;
-
-  return children;
+    return children;
 };
 
-// ---------- User Protected Route ----------
-export const ProtectedUserRoute = ({ children }) => {
-  const { user, isLoaded } = useUser();
+// Protected route for admins only
+export const ProtectedAdminRoute = ({ children }) => {
+    const { user, loading } = useContext(UserContext);
 
-  if (!isLoaded) return <div style={{ textAlign: "center", marginTop: "40px" }}>Loading...</div>;
+    if (loading) return <div style={{ textAlign: 'center', marginTop: '40px' }}>Loading...</div>;
 
-  if (!user) return <RedirectToSignIn />;
+    if (!user) return <Navigate to="/login" replace />;
 
-  if (user.publicMetadata?.role !== "user") return <Navigate to="/admin/dashboard" replace />;
+    if (!user.isAdmin) return <Navigate to="/dashboard" replace />;
 
-  return children;
+    return children;
 };
