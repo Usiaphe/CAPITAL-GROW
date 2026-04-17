@@ -1,24 +1,29 @@
 import axios from 'axios';
 import { createContext, useState, useEffect } from 'react';
 
-// create context
 export const UserContext = createContext({});
 
-// context provider
 export function UserContextProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // if user is not loaded, get profile
-        if (!user) {
-            axios.get('/profile').then(({ data }) => {
-                setUser(data);
-            });
-        }
-    }, [user]); // dependency added
+        axios.get('/profile').then(({ data }) => {
+            setUser(data);
+            setLoading(false);
+        }).catch(() => {
+            setUser(null);
+            setLoading(false);
+        });
+    }, []);
+
+    const logout = async () => {
+        await axios.post('/logout');
+        setUser(null);
+    };
 
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user, setUser, loading, logout }}>
             {children}
         </UserContext.Provider>
     );

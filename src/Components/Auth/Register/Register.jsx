@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import './Register.css';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,20 +18,13 @@ const Register = () => {
     const { name, email, password } = data;
 
     try {
-      const res = await axios.post('http://localhost:8000/register', {
-        name,
-        email,
-        password,
-      });
+      const res = await axios.post('/register', { name, email, password });
 
-      // handle errors from backend
       if (res.data.error) {
         toast.error(res.data.error);
       } else {
         setData({ name: '', email: '', password: '' });
-        toast.success('Registration successful! Welcome!');
-
-        // navigate after registration
+        toast.success('Registration successful! Please login.');
         navigate('/login');
       }
     } catch (error) {
@@ -40,33 +34,59 @@ const Register = () => {
   };
 
   return (
-    <form onSubmit={registerUser}>
-      <label>Name</label>
-      <input
-        type="text"
-        placeholder="Enter name..."
-        value={data.name}
-        onChange={(e) => setData({ ...data, name: e.target.value })}
-      />
+    <div className="register-page">
+      <div className="register-box">
+        <h1 className="register-title">CAPITAL <span>GROW</span></h1>
+        <h2 className="register-subtitle">Create Account</h2>
 
-      <label>Email</label>
-      <input
-        type="email"
-        placeholder="Enter email..."
-        value={data.email}
-        onChange={(e) => setData({ ...data, email: e.target.value })}
-      />
+        <form className="register-form" onSubmit={registerUser}>
+          <div>
+            <label className="register-label">Full Name <span>*</span></label>
+            <input
+              className="register-input"
+              type="text"
+              placeholder="Enter your name..."
+              value={data.name}
+              onChange={(e) => setData({ ...data, name: e.target.value })}
+              required
+            />
+          </div>
 
-      <label>Password</label>
-      <input
-        type="password"
-        placeholder="Enter password..."
-        value={data.password}
-        onChange={(e) => setData({ ...data, password: e.target.value })}
-      />
+          <div>
+            <label className="register-label">Email <span>*</span></label>
+            <input
+              className="register-input"
+              type="email"
+              placeholder="Enter email..."
+              value={data.email}
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+              required
+            />
+          </div>
 
-      <button type="submit">Submit</button>
-    </form>
+          <div>
+            <label className="register-label">Password <span>*</span> (min 8 chars)</label>
+            <input
+              className="register-input"
+              type="password"
+              placeholder="Enter password..."
+              value={data.password}
+              onChange={(e) => setData({ ...data, password: e.target.value })}
+              required
+              minLength={8}
+            />
+          </div>
+
+          <button className="register-button" type="submit">REGISTER</button>
+        </form>
+
+        <p className="register-login">
+          Already have an account? <Link to="/login">Login here</Link>
+        </p>
+
+        <p className="register-copyright">&copy; 2025 Capital Grow. All rights reserved.</p>
+      </div>
+    </div>
   );
 };
 

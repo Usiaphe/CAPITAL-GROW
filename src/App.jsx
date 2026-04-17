@@ -9,10 +9,11 @@ import FAQ from "./Components/FAQ/FAQ.jsx";
 import Login from "./Components/Auth/Login/Login.jsx";
 import Register from "./Components/Auth/Register/Register.jsx";
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
+import AdminDashboard from "./Components/Admin/AdminDashboard/AdminDashboard.jsx";
+import { ProtectedUserRoute, ProtectedAdminRoute } from "./Components/ProtectedRoute/ProtectedRoute.jsx";
 import axios from "axios";
 import { Toaster } from "react-hot-toast";
-import { UserContextProvider } from "./Context/userContext.jsx"
-
+import { UserContextProvider } from "./Context/userContext.jsx";
 
 axios.defaults.baseURL = "http://localhost:8000";
 axios.defaults.withCredentials = true;
@@ -20,10 +21,8 @@ axios.defaults.withCredentials = true;
 function App() {
   const location = useLocation();
 
-  // Pages where Navbar should NOT show
-  const hideNavbarRoutes = ["/login", "/register", "/dashboard"];
+  const hideNavbarRoutes = ["/login", "/register", "/dashboard", "/admin"];
 
-  // Check if the current path starts with any of the hide paths
   const showNavbar = !hideNavbarRoutes.some(route => location.pathname.startsWith(route));
 
   return (
@@ -41,7 +40,18 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route path="/dashboard" element={
+          <ProtectedUserRoute>
+            <Dashboard />
+          </ProtectedUserRoute>
+        } />
+
+        <Route path="/admin/*" element={
+          <ProtectedAdminRoute>
+            <AdminDashboard />
+          </ProtectedAdminRoute>
+        } />
       </Routes>
     </UserContextProvider>
   );
