@@ -52,21 +52,19 @@ export default function Login() {
 
         if (data.user) {
           // Create profile immediately
-          const { error: profError } = await supabase
-            .from("profiles")
-            .upsert(
-              {
-                id: data.user.id,
-                email: data.user.email,
-                full_name: fullName,
-                role: "user",
-                package: "NONE",
-                signal: "NONE",
-                investment: 0,
-                total_earning: 0,
-              },
-              { onConflict: "id" }
-            );
+          const { error: profError } = await supabase.from("profiles").upsert(
+            {
+              id: data.user.id,
+              email: data.user.email,
+              full_name: fullName,
+              role: "user",
+              package: "NONE",
+              signal: "NONE",
+              investment: 0,
+              total_earning: 0,
+            },
+            { onConflict: "id" },
+          );
 
           if (profError) {
             console.error("Profile creation error:", profError);
@@ -109,7 +107,7 @@ export default function Login() {
               investment: 0,
               total_earning: 0,
             },
-            { onConflict: "id" }
+            { onConflict: "id" },
           );
           navigate("/dashboard");
           return;
@@ -196,8 +194,8 @@ export default function Login() {
             {loading
               ? "Processing..."
               : isRegister
-              ? "Create Account"
-              : "Sign In"}
+                ? "Create Account"
+                : "Sign In"}
           </button>
         </form>
 
