@@ -215,4 +215,8 @@ export default function Login() {
           >
             {isRegister ? "Sign In" : "Register"}
           </button>
-   
+        </p>
+      </div>
+    </div>
+  );
+}
